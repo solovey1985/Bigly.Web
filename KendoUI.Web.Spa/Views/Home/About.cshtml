@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<div class="container">
+    <div class="row">
+        <div id="Spreadsheet"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-6"><button class="btn btn-primary" id="SaveSheet">Save</button>
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-danger" id="CancelChanges">Cancel</button>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+<script>
+    $(document).ready(function() {
+        $('#Spreadsheet').kendoSpreadsheet({
+            sheets: [
+                {
+                    name: "First",
+                    rows: [
+                        {
+                            height: 70,
+                            cells: [{ index: 0, value: "Id" }]
+                        }
+                    ]
+                }
+            ]
+        });
+    });
+
+
+
+</script>
+    
+}

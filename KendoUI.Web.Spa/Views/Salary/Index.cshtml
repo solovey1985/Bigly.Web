@@ -1,0 +1,77 @@
+﻿<div class="container">
+    <div class="row">
+        <div id="spreadsheet" style="width: 100%"></div>
+        <div class="col-md-6">
+            <button class="btn btn-primary" id="save">Save</button>
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-primary" id="cancel">Cancel</button>
+        </div>
+    </div>
+</div>  
+
+
+<script>
+    $(function() {
+        $("#spreadsheet").kendoSpreadsheet();
+        
+        var spreadsheet = $("#spreadsheet").getKendoSpreadsheet();
+
+        var crudServiceBaseUrl = "//localhost:9090/api";
+
+        var dataSource = new kendo.data.DataSource({
+            transport: {
+                read:  {
+                    url: crudServiceBaseUrl + "/Salary",
+                    dataType: "jsonp"
+                },
+                update: {
+                    url: crudServiceBaseUrl + "/Salary",
+                    method:'put',
+                    dataType: "jsonp"
+                },
+                destroy: {
+                    url: crudServiceBaseUrl + "/Salary/Destroy",
+                    dataType: "jsonp"
+                },
+                create: {
+                    url: crudServiceBaseUrl + "/Salary",
+                    method: 'post',
+                    dataType: "jsonp"
+                },
+                parameterMap: function(options, operation) {
+                    if (operation !== "read" && options.models) {
+                        return {models: kendo.stringify(options.models)};
+                    }
+                }
+            },
+            batch: true,
+            change: function() {
+                $("#cancel, #save").toggleClass("k-state-disabled", !this.hasChanges());
+            },
+            schema: {
+                model: {
+                    id: "id",
+                    fields: {
+                        Id: { type: "number" },
+                        ProductName: { type: "string" },
+                        UnitPrice: { type: "number" },
+                        Discontinued: { type: "boolean" },
+                        UnitsInStock: { type: "number" }
+                    }
+                }
+            }
+        });
+        $("#save").click(function () {
+            if (!$(this).hasClass("k-state-disabled")) {
+                dataSource.sync();
+            }
+        });
+
+        $("#cancel").click(function () {
+            if (!$(this).hasClass("k-state-disabled")) {
+                dataSource.cancelChanges();
+            }
+        });
+    });
+</script>

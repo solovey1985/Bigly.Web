@@ -13,35 +13,40 @@
 
 <script>
     $(function() {
-        $("#spreadsheet").kendoSpreadsheet();
         
-        var spreadsheet = $("#spreadsheet").getKendoSpreadsheet();
+        
+     
 
-        var crudServiceBaseUrl = "//localhost:9090/api";
+  
 
         var dataSource = new kendo.data.DataSource({
+            type: "json",
             transport: {
                 read:  {
-                    url: crudServiceBaseUrl + "/Salary",
-                    dataType: "jsonp"
+                    url: "//localhost:9090/api/salary",
+                    dataType: "json"
                 },
                 update: {
-                    url: crudServiceBaseUrl + "/Salary",
+                    url: "//localhost:9090/api/salary",
                     method:'put',
-                    dataType: "jsonp"
+                    dataType: "json",
+                    contentType: "application/json"
                 },
                 destroy: {
-                    url: crudServiceBaseUrl + "/Salary/Destroy",
-                    dataType: "jsonp"
+                    url: "//localhost:9090/api/salary",
+                    dataType: "json"
+
                 },
                 create: {
-                    url: crudServiceBaseUrl + "/Salary",
-                    method: 'post',
-                    dataType: "jsonp"
+                    url: "//localhost:9090/api/salary",
+                    type: 'post',
+                    dataType: "json",
+                    contentType: "application/json"
                 },
                 parameterMap: function(options, operation) {
+                    
                     if (operation !== "read" && options.models) {
-                        return {models: kendo.stringify(options.models)};
+                        return JSON.stringify(options.models);
                     }
                 }
             },
@@ -51,7 +56,7 @@
             },
             schema: {
                 model: {
-                    id: "id",
+                    id: "Id",
                     fields: {
                         Id: { type: "number" },
                         FirstName: { type: "string" },
@@ -64,9 +69,16 @@
                 }
             }
         });
+        $("#spreadsheet").kendoSpreadsheet({ 
+            sheets: [{
+            name: "Salary",
+            dataSource: dataSource
+            }]
+        });
+
         $("#save").click(function () {
             if (!$(this).hasClass("k-state-disabled")) {
-                dataSource.sync();
+               dataSource.sync();
             }
         });
 

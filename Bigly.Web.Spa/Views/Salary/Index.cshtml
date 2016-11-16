@@ -14,12 +14,7 @@
 <script>
     $(function() {
         
-        
-     
-
-  
-
-        var dataSource = new kendo.data.DataSource({
+       var dataSource = new kendo.data.DataSource({
             type: "json",
             transport: {
                 read:  {
@@ -63,8 +58,8 @@
                         LastName: { type: "string" },
                         RatePosition: { type: "string" },
                         PaidAmount: { type: "number" },
-                        Since: { type: "string" },
-                        Till: { type: "string" }
+                        Since: { type: "date" },
+                        Till: { type: "date" }
                     }
                 }
             }

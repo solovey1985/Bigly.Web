@@ -9,11 +9,27 @@
         </div>
     </div>
 </div>  
-
+<div class="row" id="container">
+    <div data-role="SourceSelector" data-source="ds" data-template="template"></div>
+</div>
+<script type="text/x-kendo-template" id="template">
+    <div style="float: left; color: salmon; margin-right: 10px"><h1>#= data #</h1></div>
+</script>
 
 <script>
-    $(function() {
-        
+    $(function(){
+
+        var ds = new kendo.data.DataSource(
+        {
+            data: [
+                { name: "ZP", url: "http://zp.drive-app.net/api" },
+                {name: "KV", url: "http://drive-app.net/api"}
+            ]
+        });
+
+        kendo.bind($("#container"));
+        $("#sourceselector").kendoSourceSelector({ dataSource: ds });
+
        var dataSource = new kendo.data.DataSource({
             type: "json",
             transport: {
@@ -29,7 +45,8 @@
                 },
                 destroy: {
                     url: "//localhost:9090/api/salary",
-                    dataType: "json"
+                    dataType: "json",
+                    contentType: "application/json"
 
                 },
                 create: {
@@ -52,8 +69,8 @@
             schema: {
                 model: {
                     id: "Id",
-                    fields: {
-                        Id: { type: "number" },
+                   fields: {
+                        Id: { from:"Id", type: "number" },
                         FirstName: { type: "string" },
                         LastName: { type: "string" },
                         RatePosition: { type: "string" },

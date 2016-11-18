@@ -15,5 +15,15 @@ namespace KendoUI.Web.Spa.Controllers
             List<SalaryViewModel> salaries = new List<SalaryViewModel>(10);
             return View(salaries);
         }
+
+        public ActionResult Add()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ActionResult Report()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

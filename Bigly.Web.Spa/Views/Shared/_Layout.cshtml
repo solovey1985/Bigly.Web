@@ -8,18 +8,9 @@
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/kendoui/css")
 
-	<!--This bundle was moved by the Telerik VS Extensions for compatibility reasons-->
-	@Scripts.Render("~/bundles/jquery")
-	<link href="https://kendo.cdn.telerik.com/2016.3.1028/styles/kendo.common-bootstrap.min.css" rel="stylesheet" type="text/css" />
-	<link href="https://kendo.cdn.telerik.com/2016.3.1028/styles/kendo.mobile.all.min.css" rel="stylesheet" type="text/css" />
-	<link href="https://kendo.cdn.telerik.com/2016.3.1028/styles/kendo.dataviz.min.css" rel="stylesheet" type="text/css" />
-	<link href="https://kendo.cdn.telerik.com/2016.3.1028/styles/kendo.bootstrap.min.css" rel="stylesheet" type="text/css" />
-	<link href="https://kendo.cdn.telerik.com/2016.3.1028/styles/kendo.dataviz.bootstrap.min.css" rel="stylesheet" type="text/css" />
-	<script src="https://kendo.cdn.telerik.com/2016.3.1028/js/jquery.min.js"></script>
-	<script src="https://kendo.cdn.telerik.com/2016.3.1028/js/jszip.min.js"></script>
-	<script src="https://kendo.cdn.telerik.com/2016.3.1028/js/kendo.all.min.js"></script>
-	<script src="https://kendo.cdn.telerik.com/2016.3.1028/js/kendo.aspnetmvc.min.js"></script>
-	<script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+    <!--This bundle was moved by the Telerik VS Extensions for compatibility reasons-->
+    @Scripts.Render("~/bundles/jquery")
+    <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -33,10 +24,22 @@
                 @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav" id="menu">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>
+                        @Html.ActionLink("Employee", "Index", "Employee")
+                        <ul>
+                            <li>@Html.ActionLink("Home", "Index", "Employee")</li>
+                            <li>@Html.ActionLink("Home", "Index", "Employee")</li>
+                        </ul>
+                    </li>
+                    <li>
+                        @Html.ActionLink("Salaries", "Index", "Salary")
+                        <ul>
+                            <li>@Html.ActionLink("Salaries", "Add", "Salary")</li>
+                            <li>@Html.ActionLink("Salaries", "Report", "Salary")</li>
+                        </ul>
+                    </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -45,14 +48,20 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
+        <footer class="navbar-fixed-bottom">
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
 
-    
+
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/Scripts/kendoui")
     @RenderSection("scripts", required: false)
+    <script>
+        $("#menu")
+            .kendoMenu({
+                animation: { open: "fadeIn" }
+            });
+    </script>
 </body>
 </html>

@@ -1,15 +1,51 @@
-﻿<div id="listView"></div>
-<script type="text/x-keno-tmpl" id="employeeTemplate">
-    <div class="employeeItem">
+﻿
+    <div id="listView"></div>
+    <div id="pager"></div>
+
+<script type="text/x-kendo-tmpl" id="employeeTemplate">
+    <div class="employeeItem" style="min-height:25px; width:100%">
         <div class="row">
-            <div class="col-md-3"> <img scr="#= avatar #.jpg"/></div>
-            <div class="col-md-9">
-                <h1>#= FullName #</h1>
-                <span>#= Position #</span>
+            <div class="col-md-2 pull-left" ><img src="http://lorempixel.com/200/200/business/#= Id #" alt="avatar"/></div>
+            <div class="col-md-9 pull-right">
+                <h3>#= FirstName # #= LastName #</h3>
+                <span>Position #= Position #</span>
             </div>
         </div>
     </div>
 </script>
 <script type="text/javascript">
-    $
+    $(function() {
+        var dataSource = new kendo.data.DataSource({
+            transport: {
+                read: {
+                    url: "http://localhost:9090/api/employee",
+                    dataType: "json"
+                }
+            },
+            schema: {
+                model: {
+                    id: "Id",
+                    fields: {
+                        Id: { from:"Id", type: "number" },
+                        FirstName: { type: "string" },
+                        LastName: { type: "string" },
+                        Position: { type: "string" }
+                    }
+                }
+            },
+            pageSize: 21
+        });
+
+        $("#pager").kendoPager({
+           dataSource: dataSource
+        });
+
+        $("#listView").kendoListView({
+            dataSource: dataSource,
+            template: kendo.template($("#employeeTemplate").html())
+        });
+
+        console.log($("#employeeTemplate").html());
+
+    });
 </script>

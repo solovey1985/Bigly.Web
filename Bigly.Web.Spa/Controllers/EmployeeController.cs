@@ -13,5 +13,10 @@ namespace KendoUI.Web.Spa.Controllers
         {
             return View();
         }
+
+        public ActionResult Add()
+        {
+            return View();
+        }
     }
 }

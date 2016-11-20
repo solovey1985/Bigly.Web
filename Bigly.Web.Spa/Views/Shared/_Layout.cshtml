@@ -27,17 +27,17 @@
                 <ul class="nav navbar-nav" id="menu">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>
-                        @Html.ActionLink("Employee", "Index", "Employee")
+                        @Html.ActionLink("Employees", "Index", "Employee")
                         <ul>
-                            <li>@Html.ActionLink("Home", "Index", "Employee")</li>
-                            <li>@Html.ActionLink("Home", "Index", "Employee")</li>
+                            <li>@Html.ActionLink("List", "Index", "Employee")</li>
+                            <li>@Html.ActionLink("Add", "Add", "Employee")</li>
                         </ul>
                     </li>
                     <li>
-                        @Html.ActionLink("Salaries", "Index", "Salary")
+                        <span>Salary</span>
                         <ul>
-                            <li>@Html.ActionLink("Salaries", "Add", "Salary")</li>
-                            <li>@Html.ActionLink("Salaries", "Report", "Salary")</li>
+                            <li>@Html.ActionLink("Salaries", "Index", "Salary")</li>
+                            
                         </ul>
                     </li>
                 </ul>
@@ -60,7 +60,8 @@
     <script>
         $("#menu")
             .kendoMenu({
-                animation: { open: "fadeIn" }
+                animation: { open: "fadeIn" },
+                theme:"MaterialBlack"
             });
     </script>
 </body>

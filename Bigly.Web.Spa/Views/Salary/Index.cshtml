@@ -68,15 +68,14 @@
             },
             schema: {
                 model: {
-                    id: "Id",
-                   fields: {
+                  fields: {
                         Id: { from:"Id", type: "number" },
                         FirstName: { type: "string" },
                         LastName: { type: "string" },
-                        RatePosition: { type: "string" },
-                        PaidAmount: { type: "number" },
+                        Position: { type: "string" },
+                        Amount: { type: "number", from: "PaidAmount" },
                         Since: { type: "date" },
-                        Till: { type: "date" }
+                        PaidDate: { title: "Paid Date", type: "date" }
                     }
                 }
             }

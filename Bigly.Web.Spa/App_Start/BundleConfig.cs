@@ -35,7 +35,8 @@ namespace KendoUI.Web.Spa
 
             bundles.Add(new StyleBundle("~/kendoui/css").Include(
                 "~/Content/kendoui/kendo.common.min.css",
-                "~/Content/kendoui/kendo.default.min.css"));
+                "~/Content/kendoui/kendo.materialblack.min.css"
+            ));
         }
     }
 }
